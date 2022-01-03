@@ -12,7 +12,7 @@ function leer($buscar) {
             
             'id' => $obj['ID_CLIENTE'],
             'nombre' => $obj['NOMBRE_CLIENTE'],
-            
+            //prueba
         );
     }
 
