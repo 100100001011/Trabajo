@@ -1,17 +1,4 @@
 <?php
-//include '../Model/consultas.php';
-
-//$nombre = $_POST['nombres'];
-//$prueba = $_POST['prueba'];
-//echo $nombre;
-//echo $prueba;
-
-
-//echo leer($nombre);
-
-
-//if (isset($_GET['accion']) == "insertar")
-
 
 if (isset($_GET['accion']) == 'insertar') {
 
@@ -33,7 +20,7 @@ if (isset($_GET['accion']) == 'insertar') {
     $jornada =  $_POST['jornada'];
     $observaciones2 =    $_POST['observaciones2'];
 
-    $resultado = insertarEmpleado($nombres,$apellidos,$cedula,$provincia,$fec_na,$email,$observaciones1,
+    $resultado = insertar($nombres,$apellidos,$cedula,$provincia,$fec_na,$email,$observaciones1,
     $foto,$fec_ingre,$cargo,$departamento,$provincia2,$sueldo,$jornada,$observaciones2);
     
     echo $resultado ;
