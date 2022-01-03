@@ -5,16 +5,11 @@ $clave= "";
 $server= "localhost";
 $bdd = "pedidos";
 
-$cnx = mysqli_connect($server,$usuario,$clave);
+$cnx = new mysqli($server,$usuario,$clave,$bdd);
 
-//PRUEBA PARA LA BASE DE DATOS
-if($cnx){
-    $resultBdd = mysqli_select_db($cnx, $bdd);
-    if($resultBdd){
-        //echo "Conexion exitosa";
-    }else{
-        //echo "No Existe la BBDD!!!";
-    }
+if (mysqli_connect_errno()) {
+    printf("Falló la conexión: %s\n", mysqli_connect_error());
+    exit();
 }else{
-    //echo "No hay conexion";
+    //echo "funciono";
 }

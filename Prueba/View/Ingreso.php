@@ -218,24 +218,18 @@
             datos.append('email', $('#inp_email').val());
             datos.append('observaciones1', $('#inp_observacion1').val());
             datos.append('foto', $('#file_image').val());
-            datos.append('fec_ingre', $('#file_image').val());
-            datos.append('cargo', $('#file_image').val());
-            datos.append('departamento', $('#file_image').val());
-            datos.append('provincia2', $('#file_image').val());
-            datos.append('sueldo', $('#file_image').val());
-            datos.append('foto', $('#file_image').val());
-            datos.append('foto', $('#file_image').val());
-            datos.append('foto', $('#file_image').val());
+            datos.append('fec_ingre', $('#inp_fechaingreso').val());
+            datos.append('cargo', $('#inp_cargo').val());
+            datos.append('departamento', $('#inp_departamento').val());
+            datos.append('provincia2', $('#inp_provincia2').val());
+            datos.append('sueldo', $('#inp_sueldo').val());
+            datos.append('jornada', $('#rad_jornada1').val());
+            datos.append('observaciones2', $('#inp_obser').val());
 
-
-
-            console.log(datos.get('nombres'));
-            console.log(datos.get('foto'));
-            console.log(datos.get('provincia'));
 
             $.ajax({
                 type: "post",
-                url: "../Controller/empleados.php",
+                url: "../Controller/empleados.php?accion=insertar",
                 data: datos,
                 processData: false,
                 contentType: false,
