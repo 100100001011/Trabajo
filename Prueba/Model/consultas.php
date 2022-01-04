@@ -43,11 +43,18 @@ function insertar($nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $o
 
 
 
-function buscar($buscar)
+function buscar($buscarNombre,$buscarCedula)
 {
     include '../Model/conexion.php';
     $arr = array();
-    $consulta = "SELECT * FROM `empleados` WHERE `Nombre` LIKE '%$buscar%'";
+    $consulta = "SELECT * FROM `empleados`";
+    if($buscarNombre != ''){
+        $consulta = "SELECT * FROM `empleados` WHERE `Nombre` LIKE '%$buscarNombre%' OR `Apellido` LIKE '%$buscarNombre%'";
+    }
+    if($buscarCedula != ''){
+        $consulta = "SELECT * FROM `empleados` WHERE `Cedula` LIKE '%$buscarCedula%'";
+    }
+
     //echo $consulta;
     if ($resultado = $cnx->query($consulta)) {
         while ($obj = $resultado->fetch_object()) {

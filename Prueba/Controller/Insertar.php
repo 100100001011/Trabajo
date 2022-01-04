@@ -1,15 +1,8 @@
 <?php
 
-if (isset($_GET['accion']) == 'buscar') {
-    include '../Model/consultas.php';
-    $b_nombre = $_POST['b_nombre'];
-    $resultado=buscar($b_nombre);
-    echo $resultado;
-    
-}
-else if (isset($_GET['accion']) == 'insertar') {
 
-    
+if (isset($_GET['accion']) == 'insertar') {
+
     include '../Model/consultas.php';
     $nombres =     $_POST['nombres'];
     $apellidos =    $_POST['apellidos'];

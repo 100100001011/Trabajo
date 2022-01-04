@@ -229,7 +229,7 @@
 
             $.ajax({
                 type: "post",
-                url: "../Controller/empleados.php?accion=insertar",
+                url: "../Controller/Insertar.php?accion=insertar",
                 data: datos,
                 processData: false,
                 contentType: false,
