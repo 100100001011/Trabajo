@@ -9,8 +9,11 @@ function leer()
             
             $arr [] = array(
             
-                'Id' => $obj->id_Empleado,
                 'Nombre' => $obj->Nombre,
+                'Apellido' => $obj->Apellido,
+                'Cedula' => $obj -> Cedula,
+                'Cargo' => $obj -> Cargo,
+
                
             );
         }

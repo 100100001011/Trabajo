@@ -1,4 +1,7 @@
 <?php
+include '../Model/consultas.php';
+echo leer();
+
 
 if (isset($_GET['accion']) == 'insertar') {
 
