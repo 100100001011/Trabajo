@@ -46,7 +46,9 @@ function insertar($nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $o
 function buscar($buscar)
 {
     include '../Model/conexion.php';
-    $consulta = "SELECT * FROM `empleados` WHERE Nombre LIKE '% $buscar %'";
+    $arr = array();
+    $consulta = "SELECT * FROM `empleados` WHERE `Nombre` LIKE '%$buscar%'";
+    //echo $consulta;
     if ($resultado = $cnx->query($consulta)) {
         while ($obj = $resultado->fetch_object()) {
             

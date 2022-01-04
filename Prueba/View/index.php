@@ -25,8 +25,9 @@
 <body>
     <div class="container">
         <div class="form-group col-md-6">
-            <label>Nombres</label>
-            <input type="text" class="form-control" id="inp_nombres" placeholder="Nombres">
+        <button id="btPrueba" type="button" class="btn btn-primary">Sign in</button>
+            <label>Buscar</label>
+            <input type="text" class="form-control" id="inp_buscar" placeholder="Buscar">
         </div>
         <table class="table">
             <thead>
@@ -42,55 +43,26 @@
         </table>
     </div>
     <script>
-        window.onload = function() {
+        $('#btPrueba').click(function(e) {
             buscar();
-        }
-
-        $("#datos_tablas").empty();
-
-        function consultar() {
-            //Recoge los datos del json
-            $.getJSON("./Controller/empleados.php", function(datos) {
-
-                var array = [];
-                //bucle para recorrer los datos index-valor
-                $.each(datos, function(llave, valor) {
-
-                    if (llave >= 0) {
-                        var tabla = "<tr>";
-                        tabla += "<td>" + valor.Nombre + " " + valor.Apellido + "</td>";
-                        tabla += "<td>" + valor.Cedula + "</td>";
-                        tabla += "<td>" + valor.Cargo + "</td>";
-                        tabla += "</tr>";
-                        console.log(valor.Nombre);
-                        array.push(tabla);
-                    }
-                });
-                //inserta los datos en la tabla
-                $("#datos_tablas").append(array.join(""));
-                console.log(datos);
-
-            });
-        }
+        });
 
         function buscar() {
-            var prueba = new FormData();
-
-            prueba.append('prueba', "Cris");
-
+            var datos = new FormData();
+            datos.append('b_nombre', $('#inp_buscar').val());
+            
             $.ajax({
                 type: "post",
-                url: "./Controller/empleados.php?accion=buscar",
-                data: prueba,
+                url: "../Controller/empleados.php?accion=buscar",
+                data: datos,
                 processData: false,
                 contentType: false,
+                dataType : "json",
                 success: function(respuesta) {
-                    alert(respuesta);
                     console.log(respuesta);
 
                 }
             });
-
 
         }
     </script>

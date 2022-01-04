@@ -1,8 +1,11 @@
 <?php
+
 if (isset($_GET['accion']) == 'buscar') {
     include '../Model/consultas.php';
-    $nombre = $_POST['prueba'];
-    echo buscar($nombre);
+    $b_nombre = $_POST['b_nombre'];
+    $resultado=buscar($b_nombre);
+    echo $resultado;
+    
 }
 else if (isset($_GET['accion']) == 'insertar') {
 
