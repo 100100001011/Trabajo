@@ -59,7 +59,7 @@
                         tabla += "<td>" + valor.Cedula + "</td>";
                         tabla += "<td>" + valor.Cargo + "</td>";
                         tabla += "</tr>";
-                        
+                        console.log(valor.Nombre);
                         array.push(tabla);
                     }
                 });
