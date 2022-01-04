@@ -1,9 +1,10 @@
 <?php
-include '../Model/consultas.php';
-echo leer();
-
-
-if (isset($_GET['accion']) == 'insertar') {
+if (isset($_GET['accion']) == 'buscar') {
+    include '../Model/consultas.php';
+    $nombre = $_POST['prueba'];
+    echo buscar($nombre);
+}
+else if (isset($_GET['accion']) == 'insertar') {
 
     
     include '../Model/consultas.php';
@@ -23,9 +24,23 @@ if (isset($_GET['accion']) == 'insertar') {
     $jornada =  $_POST['jornada'];
     $observaciones2 =    $_POST['observaciones2'];
 
-    $resultado = insertar($nombres,$apellidos,$cedula,$provincia,$fec_na,$email,$observaciones1,
-    $foto,$fec_ingre,$cargo,$departamento,$provincia2,$sueldo,$jornada,$observaciones2);
-    
-    echo $resultado ;
-    
+    $resultado = insertar(
+        $nombres,
+        $apellidos,
+        $cedula,
+        $provincia,
+        $fec_na,
+        $email,
+        $observaciones1,
+        $foto,
+        $fec_ingre,
+        $cargo,
+        $departamento,
+        $provincia2,
+        $sueldo,
+        $jornada,
+        $observaciones2
+    );
+
+    echo $resultado;
 }

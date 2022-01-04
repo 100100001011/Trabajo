@@ -39,3 +39,29 @@ function insertar($nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $o
     $sql->close();
     echo 'Insertado';
 }
+
+
+
+
+function buscar($buscar)
+{
+    include '../Model/conexion.php';
+    $consulta = "SELECT * FROM `empleados` WHERE Nombre LIKE '% $buscar %'";
+    if ($resultado = $cnx->query($consulta)) {
+        while ($obj = $resultado->fetch_object()) {
+            
+            $arr [] = array(
+            
+                'Nombre' => $obj->Nombre,
+                'Apellido' => $obj->Apellido,
+                'Cedula' => $obj -> Cedula,
+                'Cargo' => $obj -> Cargo,
+
+               
+            );
+        }
+        $resultado->close();
+    }
+
+    return json_encode($arr);
+}
