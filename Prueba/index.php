@@ -96,9 +96,12 @@
                     $.each(respuesta, function(llave, valor) {
 
                         if (llave >= 0) {
-                            var tabla = "<tr onclick='Actualizar()'>";
-                            tabla += "<td>" + valor.Nombre + " " + valor.Apellido + "</td>";
-                            tabla += "<td>" + valor.Cedula + "</td>";
+                            //var tabla = "<tr onclick='Actualizar(id)'>";
+                            var tabla = "<tr <a href='#' onclick = \" Actualizar( \n\
+                            '" + (valor.id) + "') \" >Editar";
+                            tabla += "</a>";
+                            tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
+                            tabla += "<td>" + valor.Ced + "</td>";
                             tabla += "<td>" + valor.Cargo + "</td>";
                             tabla += "</tr>";
                             console.log(valor.Nombre);
@@ -115,8 +118,9 @@
         }
 
 
-        function Actualizar(){
-            alert("hola");
+        function Actualizar(id){
+            //$(location).prop('href', './View/Ingreso.php')  
+            alert(id);
         }
     </script>
 

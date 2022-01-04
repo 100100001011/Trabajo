@@ -60,13 +60,23 @@ function buscar($buscarNombre,$buscarCedula)
         while ($obj = $resultado->fetch_object()) {
             
             $arr [] = array(
-            
-                'Nombre' => $obj->Nombre,
-                'Apellido' => $obj->Apellido,
-                'Cedula' => $obj -> Cedula,
+                'id' => $obj->id_Empleado,
+                'Nom' => $obj->Nombre,
+                'Ape' => $obj->Apellido,
+                'Ced' => $obj -> Cedula,
+                'Prov1' => $obj -> Provincia_1,
+                'FechNa' => $obj -> Fecha_Nacimiento,
+                'Email' => $obj -> Email,
+                'Observ1' => $obj -> Observaciones_1,
+                'Foto' => $obj -> Foto,
+                'FechIng' => $obj -> Fecha_ingreso,
                 'Cargo' => $obj -> Cargo,
+                'Depart' => $obj -> Departamente,
+                'Prov2' => $obj -> Provincia_2,
+                'Sueldo' => $obj -> Sueldo,
+                'Jornada' => $obj -> Jornada,
+                'Observ2' => $obj -> Observaciones_2,
 
-               
             );
         }
         $resultado->close();
