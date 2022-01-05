@@ -276,13 +276,29 @@
                             if (llave >= 0) {
                                 //var tabla = "<tr onclick='Actualizar(id)'>";
                                 var tabla = "<tr <a href='#' onclick = \" Actualizar( \n\
-                            '" + (valor.id) + "') \" >Editar";
+                            '" + (valor.id) + "',\n\
+                            '" + (valor.Nom) + "',\n\
+                            '" + (valor.Ape) + "',\n\
+                            '" + (valor.Ced) + "',\n\
+                            '" + (valor.Prov1) + "',\n\
+                            '" + (valor.FechNa) + "',\n\
+                            '" + (valor.Email) + "',\n\
+                            '" + (valor.Observ1) + "',\n\
+                            '" + (valor.Foto) + "',\n\
+                            '" + (valor.FechIng) + "',\n\
+                            '" + (valor.Cargo) + "',\n\
+                            '" + (valor.Depart) + "',\n\
+                            '" + (valor.Prov2) + "',\n\
+                            '" + (valor.Sueldo) + "',\n\
+                            '" + (valor.Jornada) + "',\n\
+                            '" + (valor.Observ2) + "') \" >Editar";
+                            
                                 tabla += "</a>";
                                 tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
                                 tabla += "<td>" + valor.Ced + "</td>";
                                 tabla += "<td>" + valor.Cargo + "</td>";
                                 tabla += "</tr>";
-                                console.log(valor.Nombre);
+                                //console.log(valor.Nombre);
                                 array.push(tabla);
                             }
                         });
@@ -296,7 +312,7 @@
             }
 
 
-         
+
 
             function insert() {
                 var datos = new FormData();
@@ -331,12 +347,27 @@
 
             }
 
-            function Actualizar(id) {
+            function Actualizar(id,nom,ape,ced,prov1,fechna,email,observ1,foto,feching,cargo,depart,prov2,sueldo,jornada,observ2) {
                 //$(location).prop('href', './View/Ingreso.php')  
-                alert(id);
+                alert(feching);
                 $('#1').hide();
                 $('#2').show();
-                $("#inp_nombres").val('in');
+                $("#inp_nombres").val(nom);
+                $("#inp_apellidos").val(ape);
+                $("#inp_cedula").val(ced);
+                $("#inp_provincia1").val(prov1);
+                $("#inp_fecha").val(fechna);
+                $("#inp_email").val(email);
+                $("#inp_observacion1").val(observ1);
+                //$("#file_image").val(foto);
+                $("#inp_fechaingreso").val(feching);
+                $("#inp_cargo").val(cargo);
+                $("#inp_departamento").val(depart);
+                $("#inp_provincia2").val(prov2);
+                $("#inp_sueldo").val(sueldo);
+                $("#rad_jornada1").val(jornada);
+                $("#inp_obser").val(observ2);
+                
 
             }
         </script>
