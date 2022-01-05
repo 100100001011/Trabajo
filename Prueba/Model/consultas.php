@@ -84,3 +84,28 @@ function buscar($buscarNombre,$buscarCedula)
 
     return json_encode($arr);
 }
+
+
+function actualizar($id,$nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2)
+{
+    include '../Model/conexion.php';
+
+
+    $consulta = "UPDATE `empleados` SET `Nombre`= ?,`Apellido`= ?,"
+    ."`Cedula`= ?,`Provincia_1`= ?,`Fecha_Nacimiento`= ?,`Email`= ?,"
+    ."`Observaciones_1`=?,`Foto`=?,`Fecha_ingreso`=?,`Cargo`=?,"
+    ."`Departamente`=?,`Provincia_2`=?,`Sueldo`=?,`Jornada`=?,"
+    ."`Observaciones_2`=? WHERE `id_Empleado` = ?";
+    $sql = $cnx->prepare($consulta);
+    
+    $sql->bind_param("ssssssssssssssss", $nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2,$id);
+    
+    $sql->execute();
+    if($sql){
+        echo "actualizo";
+    }else{
+        echo "no actualizo";
+    }
+    $sql->close();
+    //echo 'Insertado';
+}

@@ -2,8 +2,7 @@
 <html lang="en">
 
 <head>
-    <!-- JQREY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <!-- BOOTSTARP -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,6 +22,7 @@
 </head>
 
 <body>
+    <!-- TABLA RESULTADOS =====> -->
     <section id="1">
 
         <div class="container">
@@ -40,11 +40,11 @@
             </div>
             <div class="form-group col-md-4">
                 <br>
-                <button id="btBuscar" type="button" class="btn btn-primary">Sign in</button>
+                <button id="btBuscar" type="button" class="btn btn-primary">Buscar</button>
 
             </div>
             <div class="form-group col-md-10">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -57,8 +57,15 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="form-group col-md-6">
+            <button id="btInsertar" type="button" class="btn btn-primary">Crear</button>
+            <button id="btReporte" type="button" class="btn btn-primary">Reporte</button>
+            </div>
+           
     </section>
+    <!-- <====================== -->
+
+    <!-- FORMULARIO EMPLEADO =====> -->
 
     <section id='2'>
 
@@ -82,7 +89,7 @@
 
                 <div class="card-body">
                     <div class="tab-content">
-                        <!--Etiqueta-->
+                        <!--Etiqueta Datos Pesonales-->
                         <div role="tabpanel" class="tab-pane active" id="D_Personales">
                             <!--Formulario-->
                             <form action="" method="post">
@@ -138,12 +145,10 @@
 
                                 </div>
 
-
-
                             </form>
                         </div>
 
-                        <!--Etiqueta-->
+                        <!--Etiqueta Datos Laborables-->
                         <div role="tabpanel" class="tab-pane" id="D_Laborables">
                             <form action="" method="post">
                                 <div class="form-row">
@@ -206,20 +211,39 @@
                 </div>
 
             </div>
-            <button id="btPrueba" type="button" class="btn btn-primary">Sign in</button>
+            <button id="btActualizar" type="button" class="btn btn-primary">Actualizar</button>
         </div>
 
-        <script>
-            //=======>JQUERY
+        </section>
 
+        <!-- <========================= -->
+
+
+        <script>
+            var idUp;
+            //=======>JQUERY
             //AL CARGAR LA PAGINA
             window.onload = function() {
-                buscar();
+                Buscar();
                 $('#2').hide();
             }
+
+            //Cambiar de archivo
+            $('#btInsertar').click(function(e) {
+                $(location).attr('href','./View/Ingreso.php');
+
+            });
+
             //Clic btn ingresar
-            $('#btPrueba').click(function(e) {
-                insert();
+            $('#btActualizar').click(function(e) {
+                Actualizar();
+                //Ocultar
+                $('#2').hide();
+                //Mostrar
+                $('#1').show();
+                //Recargar Sitio
+                location.reload()
+
             });
             //Cargar Imagen ficha
             $(document).on("click", ".browse", function() {
@@ -238,14 +262,14 @@
             });
             //Clic btn buscar
             $('#btBuscar').click(function(e) {
-                buscar();
+                Buscar();
             });
             //Vaciar la tabla
             $("#datos_tablas").empty();
 
             //<=========
 
-            function buscar() {
+            function Buscar() {
                 /*
                 $(document).ready(function(){
                     $('#inp_buscar').keyup(function(){
@@ -275,7 +299,7 @@
 
                             if (llave >= 0) {
                                 //var tabla = "<tr onclick='Actualizar(id)'>";
-                                var tabla = "<tr <a href='#' onclick = \" Actualizar( \n\
+                                var tabla = "<tr <a href='#' onclick = \" Enviar_Datos( \n\
                             '" + (valor.id) + "',\n\
                             '" + (valor.Nom) + "',\n\
                             '" + (valor.Ape) + "',\n\
@@ -292,7 +316,7 @@
                             '" + (valor.Sueldo) + "',\n\
                             '" + (valor.Jornada) + "',\n\
                             '" + (valor.Observ2) + "') \" >Editar";
-                            
+
                                 tabla += "</a>";
                                 tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
                                 tabla += "<td>" + valor.Ced + "</td>";
@@ -314,8 +338,10 @@
 
 
 
-            function insert() {
+            function Actualizar() {
+                alert(idUp);
                 var datos = new FormData();
+                datos.append('id', idUp);
                 datos.append('nombres', $('#inp_nombres').val());
                 datos.append('apellidos', $('#inp_apellidos').val());
                 datos.append('cedula', $('#inp_cedula').val());
@@ -335,7 +361,7 @@
 
                 $.ajax({
                     type: "post",
-                    url: "./Controller/Insertar.php?accion=insertar",
+                    url: "./Controller/Actualizar.php?accion=insertar",
                     data: datos,
                     processData: false,
                     contentType: false,
@@ -347,7 +373,7 @@
 
             }
 
-            function Actualizar(id,nom,ape,ced,prov1,fechna,email,observ1,foto,feching,cargo,depart,prov2,sueldo,jornada,observ2) {
+            function Enviar_Datos(id, nom, ape, ced, prov1, fechna, email, observ1, foto, feching, cargo, depart, prov2, sueldo, jornada, observ2) {
                 //$(location).prop('href', './View/Ingreso.php')  
                 alert(feching);
                 $('#1').hide();
@@ -367,13 +393,12 @@
                 $("#inp_sueldo").val(sueldo);
                 $("#rad_jornada1").val(jornada);
                 $("#inp_obser").val(observ2);
-                
-
+                idUp = id
             }
         </script>
 
 
-    </section>
+    
 
 </body>
 

@@ -3,8 +3,7 @@
 
 <head>
 
-    <!-- JQREY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
     <!-- BOOTSTARP -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -70,7 +69,7 @@
                                     <label>Cedula</label>
                                     <input type="text" class="form-control" id="inp_cedula" placeholder="Cedula">
                                 </div>
-                               
+
                                 <div class="form-group col-md-6">
                                     <label>Provincia</label>
                                     <select class="form-control" id="inp_provincia1">
