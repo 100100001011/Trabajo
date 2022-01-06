@@ -40,11 +40,11 @@
             </div>
 
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
-                    <a href="#D_Personales" data-toggle="tab">Datos Personales</a>
+                <li class="nav-item"">
+                    <a class="nav-link active" href="#D_Personales" data-toggle="tab">Datos Personales</a>
                 </li>
                 <li>
-                    <a href="#D_Laborables" data-toggle="tab">Datos Laborables</a>
+                    <a class="nav-link "href="#D_Laborables" data-toggle="tab">Datos Laborables</a>
                 </li>
             </ul>
 
@@ -180,7 +180,7 @@
 
 
 
-        </div>
+</div>
         <button id="btPrueba" type="button" class="btn btn-primary">Sign in</button>
     </div>
 

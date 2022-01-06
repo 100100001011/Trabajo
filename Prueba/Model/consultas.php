@@ -6,15 +6,25 @@ function leer()
     $consulta = "SELECT * FROM `empleados`";
     if ($resultado = $cnx->query($consulta)) {
         while ($obj = $resultado->fetch_object()) {
-            
-            $arr [] = array(
-            
-                'Nombre' => $obj->Nombre,
-                'Apellido' => $obj->Apellido,
-                'Cedula' => $obj -> Cedula,
-                'Cargo' => $obj -> Cargo,
 
-               
+            $arr[] = array(
+                'id' => $obj->id_Empleado,
+                'Nom' => $obj->Nombre,
+                'Ape' => $obj->Apellido,
+                'Ced' => $obj->Cedula,
+                'Prov1' => $obj->Provincia_1,
+                'FechNa' => $obj->Fecha_Nacimiento,
+                'Email' => $obj->Email,
+                'Observ1' => $obj->Observaciones_1,
+                'Foto' => $obj->Foto,
+                'FechIng' => $obj->Fecha_ingreso,
+                'Cargo' => $obj->Cargo,
+                'Depart' => $obj->Departamente,
+                'Prov2' => $obj->Provincia_2,
+                'Sueldo' => $obj->Sueldo,
+                'Jornada' => $obj->Jornada,
+                'Observ2' => $obj->Observaciones_2,
+
             );
         }
         $resultado->close();
@@ -43,39 +53,39 @@ function insertar($nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $o
 
 
 
-function buscar($buscarNombre,$buscarCedula)
+function buscar($buscarNombre, $buscarCedula)
 {
     include '../Model/conexion.php';
     $arr = array();
     $consulta = "SELECT * FROM `empleados`";
-    if($buscarNombre != ''){
+    if ($buscarNombre != '') {
         $consulta = "SELECT * FROM `empleados` WHERE `Nombre` LIKE '%$buscarNombre%' OR `Apellido` LIKE '%$buscarNombre%'";
     }
-    if($buscarCedula != ''){
+    if ($buscarCedula != '') {
         $consulta = "SELECT * FROM `empleados` WHERE `Cedula` LIKE '%$buscarCedula%'";
     }
 
     //echo $consulta;
     if ($resultado = $cnx->query($consulta)) {
         while ($obj = $resultado->fetch_object()) {
-            
-            $arr [] = array(
+
+            $arr[] = array(
                 'id' => $obj->id_Empleado,
                 'Nom' => $obj->Nombre,
                 'Ape' => $obj->Apellido,
-                'Ced' => $obj -> Cedula,
-                'Prov1' => $obj -> Provincia_1,
-                'FechNa' => $obj -> Fecha_Nacimiento,
-                'Email' => $obj -> Email,
-                'Observ1' => $obj -> Observaciones_1,
-                'Foto' => $obj -> Foto,
-                'FechIng' => $obj -> Fecha_ingreso,
-                'Cargo' => $obj -> Cargo,
-                'Depart' => $obj -> Departamente,
-                'Prov2' => $obj -> Provincia_2,
-                'Sueldo' => $obj -> Sueldo,
-                'Jornada' => $obj -> Jornada,
-                'Observ2' => $obj -> Observaciones_2,
+                'Ced' => $obj->Cedula,
+                'Prov1' => $obj->Provincia_1,
+                'FechNa' => $obj->Fecha_Nacimiento,
+                'Email' => $obj->Email,
+                'Observ1' => $obj->Observaciones_1,
+                'Foto' => $obj->Foto,
+                'FechIng' => $obj->Fecha_ingreso,
+                'Cargo' => $obj->Cargo,
+                'Depart' => $obj->Departamente,
+                'Prov2' => $obj->Provincia_2,
+                'Sueldo' => $obj->Sueldo,
+                'Jornada' => $obj->Jornada,
+                'Observ2' => $obj->Observaciones_2,
 
             );
         }
@@ -86,24 +96,24 @@ function buscar($buscarNombre,$buscarCedula)
 }
 
 
-function actualizar($id,$nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2)
+function actualizar($id, $nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2)
 {
     include '../Model/conexion.php';
 
 
     $consulta = "UPDATE `empleados` SET `Nombre`= ?,`Apellido`= ?,"
-    ."`Cedula`= ?,`Provincia_1`= ?,`Fecha_Nacimiento`= ?,`Email`= ?,"
-    ."`Observaciones_1`=?,`Foto`=?,`Fecha_ingreso`=?,`Cargo`=?,"
-    ."`Departamente`=?,`Provincia_2`=?,`Sueldo`=?,`Jornada`=?,"
-    ."`Observaciones_2`=? WHERE `id_Empleado` = ?";
+        . "`Cedula`= ?,`Provincia_1`= ?,`Fecha_Nacimiento`= ?,`Email`= ?,"
+        . "`Observaciones_1`=?,`Foto`=?,`Fecha_ingreso`=?,`Cargo`=?,"
+        . "`Departamente`=?,`Provincia_2`=?,`Sueldo`=?,`Jornada`=?,"
+        . "`Observaciones_2`=? WHERE `id_Empleado` = ?";
     $sql = $cnx->prepare($consulta);
-    
-    $sql->bind_param("ssssssssssssssss", $nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2,$id);
-    
+
+    $sql->bind_param("ssssssssssssssss", $nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2, $id);
+
     $sql->execute();
-    if($sql){
+    if ($sql) {
         echo "actualizo";
-    }else{
+    } else {
         echo "no actualizo";
     }
     $sql->close();

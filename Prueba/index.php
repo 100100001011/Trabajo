@@ -234,6 +234,11 @@
 
             });
 
+            $('#btReporte').click(function(e) {
+                $(location).attr('href','./View/Reporte.php');
+
+            });
+
             //Clic btn ingresar
             $('#btActualizar').click(function(e) {
                 Actualizar();
@@ -315,7 +320,7 @@
                             '" + (valor.Prov2) + "',\n\
                             '" + (valor.Sueldo) + "',\n\
                             '" + (valor.Jornada) + "',\n\
-                            '" + (valor.Observ2) + "') \" >Editar";
+                            '" + (valor.Observ2) + "') \" >";
 
                                 tabla += "</a>";
                                 tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";

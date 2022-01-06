@@ -23,90 +23,126 @@
 </head>
 
 <body>
-    <table id="myTable">
-        <thead>
-            <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Email</th>
-                <th>Due</th>
-                <th>Web Site</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Smith</td>
-                <td>John</td>
-                <td>jsmith@gmail.com</td>
-                <td>$50.00</td>
-                <td>http://www.jsmith.com</td>
-            </tr>
-            <tr>
-                <td>Bach</td>
-                <td>Frank</td>
-                <td>fbach@yahoo.com</td>
-                <td>$50.00</td>
-                <td>http://www.frank.com</td>
-            </tr>
-            <tr>
-                <td>Doe</td>
-                <td>Jason</td>
-                <td>jdoe@hotmail.com</td>
-                <td>$100.00</td>
-                <td>http://www.jdoe.com</td>
-            </tr>
-            <tr>
-                <td>Conway</td>
-                <td>Tim</td>
-                <td>tconway@earthlink.net</td>
-                <td>$50.00</td>
-                <td>http://www.timconway.com</td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <div class="form-group col-md-12">
 
+        <h2 align="center" class="bg-primary text-white">Reporte Empleado</h2>
+            
 
-    <script>
-        (function($) {
-            $.fn.extend({
-                makeSortable: function() {
-                    var Mitabla = this;
-
-                    var getCellValue = function(fila, index) {
-                        return $(fila).children('td').eq(index).text();
-                    };
-
-                    Mitabla.find('th').click(function() {
-                        var tabla = $(this).parents('table').eq(0);
-
+        </div>
+     
+        <div class="form-group col-md-12 ">
+            <table class="table table-hover" id="Reporte">
+                <thead>
+                    <tr>
+                        <th class="bg-info text-white">Nombre</th>
+                        <th class="bg-info text-white">Cedula</th>
+                        <th class="bg-info text-white">Provincia</th>
+                        <th class="bg-info text-white">Fecha Nacimiento</th>
+                        <th class="bg-info text-white">Email</th>
+                        <th class="bg-info text-white">Observaciones</th>
+                        <th class="bg-info text-white">Fecha Ingreso</th>
+                        <th class="bg-info text-white">Cargo</th>
+                        <th class="bg-info text-white">Departamento</th>
+                        <th class="bg-info text-white">Provincia</th>
+                        <th class="bg-info text-white">Suledo</th>
+                        <th class="bg-info text-white">Jornada</th>
+                        <th class="bg-info text-white">Observaciones</th>
                         
-                        var fila = tabla.find('tr:gt(0)').toArray().sort(function(a, b) {
-                            var index = $(this).index();
-                            var valA = getCellValue(a, index),
-                                valB = getCellValue(b, index);
+                    </tr>
+                </thead>
+                <tbody id="datos_tablas">
 
-                            return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                </tbody>
+            </table>
+        </div>
+        
+
+
+        <script>
+            (function($) {
+                $.fn.extend({
+                    makeSortable: function() {
+                        var Mitabla = this;
+
+                        var getCellValue = function(fila, index) {
+                            return $(fila).children('td').eq(index).text();
+                        };
+
+                        Mitabla.find('th').click(function() {
+                            var tabla = $(this).parents('table').eq(0);
+
+
+                            var fila = tabla.find('tr:gt(0)').toArray().sort(function(a, b) {
+                                var index = $(this).index();
+                                var valA = getCellValue(a, index),
+                                    valB = getCellValue(b, index);
+
+                                return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
+                            });
+
+                            this.asc = !this.asc;
+
+                            if (!this.asc) {
+                                fila = fila.reverse();
+                            }
+
+                            for (var i = 0; i < fila.length; i++) {
+                                tabla.append(fila[i]);
+                            }
                         });
+                    }
+                });
+            })(jQuery);
 
-                        this.asc = !this.asc;
 
-                        if (!this.asc) {
-                            fila = fila.reverse();
-                        }
-
-                        for (var i = 0; i < fila.length; i++) {
-                            tabla.append(fila[i]);
-                        }
-                    });
-                }
+            $(function() {
+                $("#Reporte").makeSortable();
             });
-        })(jQuery);
+
+            window.onload = function() {
+                Buscar();
+                
+            }
 
 
-        $(function() {
-            $("#myTable").makeSortable();
-        });
-    </script>
+            function Buscar() {
+                $.getJSON("../Controller/Leer.php?accion=leer",function(respuesta){
+                    console.log(respuesta);
+                        var array = [];
+                        //bucle para recorrer los datos index-valor
+                        $.each(respuesta, function(llave, valor) {
+
+                            if (llave >= 0) {
+                                
+                                tabla = "<tr>";
+                                tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
+                                tabla += "<td>" + valor.Ced + "</td>";
+                                tabla += "<td>" + valor.Prov1 + "</td>";
+                                tabla += "<td>" + valor.FechNa + "</td>";
+                                tabla += "<td>" + valor.Email + "</td>";
+                                tabla += "<td>" + valor.Observ1 + "</td>";
+                                tabla += "<td>" + valor.FechIng + "</td>";
+                                tabla += "<td>" + valor.Cargo + "</td>";
+                                tabla += "<td>" + valor.Depart + "</td>";
+                                tabla += "<td>" + valor.Prov2 + "</td>";
+                                tabla += "<td>" + valor.Sueldo + "</td>";
+                                tabla += "<td>" + valor.Jornada + "</td>";
+                                tabla += "<td>" + valor.Observ2 + "</td>";
+                                tabla += "</tr>";
+                                //console.log(valor.Nombre);
+                                array.push(tabla);
+                            }
+                        });
+                        //inserta los datos en la tabla
+                        $("#datos_tablas").append(array.join(""));
+                        
+
+                });
+               
+                $("#datos_tablas").empty();
+            }
+        </script>
 </body>
 
 </html>
