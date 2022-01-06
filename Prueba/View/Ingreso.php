@@ -3,7 +3,7 @@
 
 <head>
 
- 
+
     <!-- BOOTSTARP -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -25,6 +25,10 @@
             visibility: hidden;
             position: absolute;
         }
+
+        textarea {
+            resize: none;
+        }
     </style>
 </head>
 
@@ -41,33 +45,38 @@
 
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item"">
-                    <a class="nav-link active" href="#D_Personales" data-toggle="tab">Datos Personales</a>
+                    <a class=" nav-link active" href="#D_Personales" data-toggle="tab">Datos Personales</a>
                 </li>
                 <li>
-                    <a class="nav-link "href="#D_Laborables" data-toggle="tab">Datos Laborables</a>
+                    <a class="nav-link " href="#D_Laborables" data-toggle="tab">Datos Laborables</a>
                 </li>
             </ul>
 
-            <div class="card-body">
-                <div class="tab-content">
-                    <!--Etiqueta-->
-                    <div role="tabpanel" class="tab-pane active" id="D_Personales">
-                        <!--Formulario-->
-                        <form action="" method="post">
+            <form action="javascript:insert();" method="post" class="was-validated">
+                <div class="card-body">
+                    <div class="tab-content">
+
+                        <!--Etiqueta-->
+                        <div role="tabpanel" class="tab-pane active" id="D_Personales">
+                            <!--Formulario-->
+
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
                                     <label>Nombres</label>
-                                    <input type="text" class="form-control" id="inp_nombres" placeholder="Nombres">
+                                    <input type="text" class="form-control" id="inp_nombres" placeholder="Nombres" maxlength="50" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Apellidos</label>
-                                    <input type="text" class="form-control" id="inp_apellidos" placeholder="Apellidos">
+                                    <input type="text" class="form-control" id="inp_apellidos" placeholder="Apellidos" maxlength="50" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Cedula</label>
-                                    <input type="text" class="form-control" id="inp_cedula" placeholder="Cedula">
+                                    <input class="form-control" id="inp_cedula" placeholder="Cedula" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -82,16 +91,19 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Fecha de nacimientos</label>
-                                    <input type="date" class="form-control" id="inp_fecha" placeholder="aaaa-mm-dd">
+                                    <input type="date" class="form-control" id="inp_fecha" placeholder="aaaa-mm-dd" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" id="inp_email" placeholder="Email">
+                                    <input type="email" class="form-control" id="inp_email" placeholder="Email" required maxlength="50">
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Observaciones</label>
-                                    <input type="text" class="form-control" id="inp_observacion1" placeholder="Comentario u obsercvacion">
+
+                                    <textarea class="form-control" id="inp_observacion1" rows="3" placeholder="Observaciones" maxlength="100"></textarea>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Fotografia</label>
@@ -108,26 +120,29 @@
 
 
 
-                        </form>
-                    </div>
 
-                    <!--Etiqueta-->
-                    <div role="tabpanel" class="tab-pane" id="D_Laborables">
-                        <form action="" method="post">
+                        </div>
+
+                        <!--Etiqueta-->
+                        <div role="tabpanel" class="tab-pane" id="D_Laborables">
+
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
                                     <label>Fecha de ingreso</label>
-                                    <input type="date" class="form-control" id="inp_fechaingreso" placeholder="aaaa-mm-dd">
+                                    <input type="date" class="form-control" id="inp_fechaingreso" placeholder="aaaa-mm-dd" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Cargo</label>
-                                    <input type="text" class="form-control" id="inp_cargo">
+                                    <input type="text" class="form-control" id="inp_cargo" maxlength="20" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Departamento:</label>
-                                    <input type="text" class="form-control" id="inp_departamento">
+                                    <input type="text" class="form-control" id="inp_departamento" maxlength="20" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -142,7 +157,8 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Sueldo:</label>
-                                    <input type="text" class="form-control" id="inp_sueldo">
+                                    <input type="text" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                    <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
 
@@ -163,32 +179,40 @@
 
                                 <div class="form-group col-md-12">
                                     <label for="inputAddress2">Observaciones</label>
-                                    <input type="text" class="form-control" id="inp_obser" placeholder="Apartment, studio, or floor">
+
+                                    <textarea class="form-control" id="inp_obser" rows="3" placeholder="Observaciones" maxlength="100"></textarea>
                                 </div>
 
                             </div>
-                        </form>
-                    </div>
+
+                            <div class="form-group col-md-12" >
+                                <button id="btIngresar" type="submit" class="btn btn-primary">Ingresar</button>
+
+                            </div>
 
 
 
+            </form>
+        </div>
+
+    </div>
+    </div>
 
 
 
-                </div>
-            </div>
+    </div>
 
 
-
-</div>
-        <button id="btPrueba" type="button" class="btn btn-primary">Sign in</button>
     </div>
 
     <script>
         //=======>JQUERY
-        $('#btPrueba').click(function(e) {
-            insert();
+        /*
+        $('#btIngresar').click(function(e) {
+            alert("aplasto");
+            //insert();
         });
+        */
         //Cargar Imagen
         $(document).on("click", ".browse", function() {
             var file = $(this).parents().find(".file");
@@ -206,6 +230,7 @@
         });
 
         //<=========
+
 
         function insert() {
             var datos = new FormData();
