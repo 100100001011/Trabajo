@@ -44,7 +44,7 @@
         <div class="container">
             <div class="form-group col-md-12">
                 <div class="card-header">
-                <h4 align="center" >Modulo Empleados</h4>
+                    <h4 align="center">Modulo Empleados</h4>
                 </div>
 
             </div>
@@ -52,7 +52,7 @@
             <div class="form-group col-md-12">
                 <div class="form-group col-md-4">
 
-                    <label >Nombre</label>
+                    <label>Nombre</label>
                     <input type="text" class="form-control" id="inp_buscarNombre" placeholder="Buscar Nombre ">
 
                 </div>
@@ -68,7 +68,7 @@
 
                 </div>
             </div>
-            
+
             <div class="card-body">
                 <div class="form-group col-md-12">
                     <table class="table table-bordered">
@@ -103,7 +103,7 @@
             <div role="tabpanel">
 
                 <div class="card-header">
-                <h4 align="center" >Actualizar</h4>
+                    <h4 align="center">Actualizar Datos</h4>
                 </div>
 
                 <ul class="nav nav-tabs" role="tablist">
@@ -195,13 +195,13 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Cargo</label>
-                                        <input type="text" class="form-control" id="inp_cargo" maxlength="20" required>
+                                        <input type="text" class="form-control" id="inp_cargo" placeholder="Cargo" maxlength="20" required>
                                         <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Departamento:</label>
-                                        <input type="text" class="form-control" id="inp_departamento" maxlength="20" required>
+                                        <input type="text" class="form-control" id="inp_departamento" placeholder="Departamento" maxlength="20" required>
                                         <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
@@ -214,7 +214,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label>Sueldo:</label>
-                                        <input type="number" step="any" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                        <input type="number" step="any" class="form-control" id="inp_sueldo" placeholder="USD" maxlength="10" required>
                                         <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
@@ -224,11 +224,11 @@
                                         <br>
                                         <div class="form-group row-md-4">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="jornada" id="rad_jornada1" value="S">
+                                                <input class="form-check-input" type="radio" name="jornadaS" id="rad_jornada1" value="S">
                                                 <label class="form-check-label">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="jornada" id="rad_jornada2" value="N">
+                                                <input class="form-check-input" type="radio" name="jornadaN" id="rad_jornada2" value="N">
                                                 <label class="form-check-label">No</label>
                                             </div>
                                         </div>
@@ -250,10 +250,10 @@
                 </form>
             </div>
             <div class="divbotones">
-            
-            
-            <button id="btSalir" type="button" class="btn btn-danger">Salir</button>
-        </div>
+
+
+                <button id="btSalir" type="button" class="btn btn-danger">Salir</button>
+            </div>
         </div>
 
     </section>
@@ -269,6 +269,7 @@
         });
         //AL CARGAR LA PAGINA
         window.onload = function() {
+            
             Buscar_Mostrar();
             provincia();
             $('#2').hide();
@@ -319,7 +320,9 @@
                 })
             })
             */
-
+            //BLOQUEO DE RADIO BUTTON
+            $('input[name=jornadaS]').attr("disabled",true);
+            $('input[name=jornadaN]').attr("disabled",true);
             var datos = new FormData();
             datos.append('b_nombre', $('#inp_buscarNombre').val());
             datos.append('b_cedula', $('#inp_buscarCedula').val());
@@ -426,6 +429,7 @@
         function Enviar_Datos(id, nom, ape, ced, prov1, fechna, email, observ1, foto, feching, cargo, depart, prov2, sueldo, jornada, observ2) {
             //$(location).prop('href', './View/Ingreso.php')  
             //alert(feching);
+            var jornada;
             $('#1').hide();
             $('#2').show();
             $("#inp_nombres").val(nom);
@@ -441,9 +445,17 @@
             $("#inp_departamento").val(depart);
             $("#inp_provincia2").val(prov2);
             $("#inp_sueldo").val(sueldo);
-            $("input:radio[name=jornada]").val(jornada);
+            //$("input:radio[name=jornada]").val(jornada);
             $("#inp_obser").val(observ2);
-            idUp = id
+            
+            //Envio de parametros RADIO 
+            if (jornada == "S") { // esta es la parte que no se si este haciendo bien
+                $("input[type='radio'][name='jornadaS'][value='S']").prop('checked', true);
+            } else {
+                $("input[type='radio'][name='jornadaN'][value='N']").prop('checked', true);
+            }
+            
+            idUp = id;
         }
 
         function provincia() {

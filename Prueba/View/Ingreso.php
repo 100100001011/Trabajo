@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingreso</title>
+    <title>Ingreso de Datos</title>
 
     <style>
         .file {
@@ -50,7 +50,7 @@
         <div role="tabpanel">
 
             <div class="card-header">
-            <h4 align="center" >Ingreso</h4>
+            <h4 align="center" >Ingreso de Datos</h4>
             </div>
 
             <ul class="nav nav-tabs" role="tablist">
@@ -142,13 +142,13 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Cargo</label>
-                                    <input type="text" class="form-control" id="inp_cargo" maxlength="20" required>
+                                    <input type="text" class="form-control" id="inp_cargo" placeholder="Cargo" maxlength="20" required>
                                     <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Departamento</label>
-                                    <input type="text" class="form-control" id="inp_departamento" maxlength="20" required>
+                                    <input type="text" class="form-control" id="inp_departamento" placeholder="Departamento" maxlength="20" required>
                                     <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
@@ -161,7 +161,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Sueldo</label>
-                                    <input type="number" step="any" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                    <input type="number" step="any" class="form-control" id="inp_sueldo" placeholder="USD" maxlength="10" required>
                                     <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
