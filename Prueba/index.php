@@ -27,6 +27,13 @@
         textarea {
             resize: none;
         }
+
+        .divbotones {
+
+            margin: 1rem;
+            padding: 1rem;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -34,42 +41,53 @@
 <body>
     <!-- TABLA RESULTADOS =====> -->
     <section id="1">
-
         <div class="container">
-            <div class="form-group col-md-4">
-
-                <label>Nombre</label>
-                <input type="text" class="form-control" id="inp_buscarNombre" placeholder="Buscar">
-
-            </div>
-            <div class="form-group col-md-4">
-
-                <label>Cedula</label>
-                <input type="text" class="form-control" id="inp_buscarCedula" placeholder="Buscar">
+            <div class="form-group col-md-12">
+                <div class="card-header">
+                <h4 align="center" >Modulo Empleados</h4>
+                </div>
 
             </div>
-            <div class="form-group col-md-4">
-                <br>
-                <button id="btBuscar" type="button" class="btn btn-primary">Buscar</button>
 
-            </div>
-            <div class="form-group col-md-10">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Cedula</th>
-                            <th>Cargo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="datos_tablas">
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-4">
 
-                    </tbody>
-                </table>
+                    <label >Nombre</label>
+                    <input type="text" class="form-control" id="inp_buscarNombre" placeholder="Buscar Nombre ">
+
+                </div>
+                <div class="form-group col-md-4">
+
+                    <label>Cedula</label>
+                    <input type="text" class="form-control" id="inp_buscarCedula" placeholder="Buscar C.I">
+
+                </div>
+                <div class="form-group col-md-4">
+                    <br>
+                    <button id="btBuscar" type="button" class="btn btn-primary">Buscar</button>
+
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <button id="btInsertar" type="button" class="btn btn-primary">Crear</button>
-                <button id="btReporte" type="button" class="btn btn-primary">Reporte</button>
+            
+            <div class="card-body">
+                <div class="form-group col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Cedula</th>
+                                <th class="text-center">Cargo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="datos_tablas">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group col-md-12">
+                    <button id="btInsertar" type="button" class="btn btn-success">Crear</button>
+                    <button id="btReporte" type="button" class="btn btn-warning">Reporte</button>
+                </div>
             </div>
 
     </section>
@@ -85,7 +103,7 @@
             <div role="tabpanel">
 
                 <div class="card-header">
-                    Actualizar
+                <h4 align="center" >Actualizar</h4>
                 </div>
 
                 <ul class="nav nav-tabs" role="tablist">
@@ -153,7 +171,7 @@
 
                                         <div>
                                             <img src="" width="100" height="100" id="prevista" class="img-circle">
-                                            <button type="button" class="browse btn btn-primary">Cargar</button>
+                                            <button type="button" class="browse btn btn-primary">Cargar Imagen</button>
                                         </div>
 
                                     </div>
@@ -196,7 +214,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label>Sueldo:</label>
-                                        <input type="text" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                        <input type="number" step="any" class="form-control" id="inp_sueldo" maxlength="10" required>
                                         <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
@@ -225,13 +243,17 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <button id="btActualizar" type="submit" class="btn btn-primary">Actualizar</button>
+                                    <button id="btActualizar" type="submit" class="btn btn-info">Actualizar</button>
 
                                 </div>
 
                 </form>
             </div>
-
+            <div class="divbotones">
+            
+            
+            <button id="btSalir" type="button" class="btn btn-danger">Salir</button>
+        </div>
         </div>
 
     </section>
@@ -242,6 +264,9 @@
     <script>
         var idUp;
         //=======>JQUERY
+        $('#btSalir').click(function(e) {
+            location.reload();
+        });
         //AL CARGAR LA PAGINA
         window.onload = function() {
             Buscar_Mostrar();
@@ -260,7 +285,7 @@
 
         });
 
-        
+
         //Cargar Imagen ficha
         $(document).on("click", ".browse", function() {
             var file = $(this).parents().find(".file");
@@ -400,7 +425,7 @@
 
         function Enviar_Datos(id, nom, ape, ced, prov1, fechna, email, observ1, foto, feching, cargo, depart, prov2, sueldo, jornada, observ2) {
             //$(location).prop('href', './View/Ingreso.php')  
-            alert(feching);
+            //alert(feching);
             $('#1').hide();
             $('#2').show();
             $("#inp_nombres").val(nom);

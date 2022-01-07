@@ -29,6 +29,15 @@
         textarea {
             resize: none;
         }
+
+        .divbotones {
+            
+            margin: 1rem;
+            padding: 1rem;
+            
+            /* IMPORTANTE */
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -41,7 +50,7 @@
         <div role="tabpanel">
 
             <div class="card-header">
-                Ingreso
+            <h4 align="center" >Ingreso</h4>
             </div>
 
             <ul class="nav nav-tabs" role="tablist">
@@ -109,7 +118,7 @@
 
                                     <div>
                                         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="100" height="100" id="prevista" class="img-circle">
-                                        <button type="button" class="browse btn btn-primary">Cargar imagen</button>
+                                        <button type="button" class="browse btn btn-primary">Cargar Imagen</button>
                                     </div>
 
                                 </div>
@@ -152,7 +161,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Sueldo</label>
-                                    <input type="number" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                    <input type="number" step="any" class="form-control" id="inp_sueldo" maxlength="10" required>
                                     <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
@@ -166,7 +175,7 @@
                                             <label class="form-check-label">Si</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="jornada" id="rad_jornada2" value="N">
+                                            <input class="form-check-input" type="radio" name="jornada" id="rad_jornada2" value="N" checked>
                                             <label class="form-check-label">No</label>
                                         </div>
                                     </div>
@@ -186,6 +195,14 @@
                             </div>
 
             </form>
+
+
+        </div>
+
+        <div class="divbotones">
+            
+            <button id="btReporte" type="button" class="btn btn-warning">Reporte</button>
+            <button id="btSalir" type="button" class="btn btn-danger">Salir</button>
         </div>
 
     </div>
@@ -197,12 +214,15 @@
 
     <script>
         //=======>JQUERY
-        /*
-        $('#btIngresar').click(function(e) {
-            location.reload();
+        
+        $('#btReporte').click(function(e) {
+            $(location).attr('href', './Reporte.php');
         });
-        */
-      
+        
+        $('#btSalir').click(function(e) {
+            $(location).attr('href', '../index.php');
+        });
+
 
         window.onload = function() {
 
@@ -260,7 +280,7 @@
                         alert("DATOS INGRESADOS");
                         $('#F_Ingreso')[0].reset();
                         location.reload();
-                    }else{
+                    } else {
                         alert("DATOS NO INGRESADOS");
                     }
 
@@ -277,12 +297,8 @@
                 $.each(registro, function(llave, valor) {
 
                     if (llave >= 0) {
-
-
                         console.log(valor.inp_provincia1);
-
                         var select = "<option value=' " + valor.nombre_provincia + "'>" + valor.nombre_provincia + "</option>";
-                        //var select = "<option value='cris'>cris</option>";
                         array.push(select);
                     }
                     //alert(array);
@@ -295,23 +311,7 @@
             })
         }
 
-        function limpiarCampos() {
-            datos.append('', $('#inp_nombres').val());
-            datos.append('', $('#inp_apellidos').val());
-            datos.append('', $('#inp_cedula').val());
-            datos.append('', $('#inp_provincia1').val());
-            datos.append('', $('#inp_fecha').val());
-            datos.append('', $('#inp_email').val());
-            datos.append('', $('#inp_observacion1').val());
-            datos.append('', $('#file_image').val());
-            datos.append('', $('#inp_fechaingreso').val());
-            datos.append('', $('#inp_cargo').val());
-            datos.append('', $('#inp_departamento').val());
-            datos.append('', $('#inp_provincia2').val());
-            datos.append('', $('#inp_sueldo').val());
-            datos.append('', $('#rad_jornada1').val());
-            datos.append('', $('#inp_obser').val());
-        }
+      
     </script>
 
 </body>

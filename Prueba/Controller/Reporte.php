@@ -4,7 +4,7 @@ if (isset($_GET['accion']) == 'leer') {
     
     include '../Model/consultas.php';
     
-    $resultado=leer();
+    $resultado=Reporte();
     echo $resultado;
     
 }

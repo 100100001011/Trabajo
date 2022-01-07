@@ -20,46 +20,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .divbotones {
+
+            margin: 1rem;
+            padding: 1rem;
+
+            /* IMPORTANTE */
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <div class="form-group col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="form-group col-md-12 ">
+                <h3 align="center" >Reporte Empleado</h3>
 
-        <h2 align="center" class="bg-primary text-white">Reporte Empleado</h2>
-            
-
+            </div>
         </div>
-     
-        <div class="form-group col-md-12 ">
-            <table class="table-bordered" id="Reporte">
-                <thead>
-                    <tr>
-                        <th class="bg-success text-black">Nombre</th>
-                        <th class="bg-success text-black">Cedula</th>
-                        <th class="bg-success text-black">Provincia</th>
-                        <th class="bg-success text-black">Fecha Nacimiento</th>
-                        <th class="bg-success text-black">Email</th>
-                        <th class="bg-success text-black">Observaciones</th>
-                        <th class="bg-success text-black">Fecha Ingreso</th>
-                        <th class="bg-success text-black">Cargo</th>
-                        <th class="bg-success text-black">Departamento</th>
-                        <th class="bg-success text-black">Provincia</th>
-                        <th class="bg-success text-black">Suledo</th>
-                        <th class="bg-success text-black">Jornada</th>
-                        <th class="bg-success text-black">Observaciones</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="datos_tablas">
+        <div class="card-body">
+            <div class="form-group col-md-12 ">
+                <!--class="table-bordered"-->
+                <table id="Reporte" class="table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Cedula</th>
+                            <th class="text-center">Provincia</th>
+                            <th class="text-center">Fecha Nacimiento</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Observaciones</th>
+                            <th class="text-center">Fecha Ingreso</th>
+                            <th class="text-center">Cargo</th>
+                            <th class="text-center">Departamento</th>
+                            <th class="text-center">Provincia</th>
+                            <th class="text-center">Suledo</th>
+                            <th class="text-center">Jornada</th>
+                            <th class="text-center">Observaciones</th>
 
-                </tbody>
-            </table>
+                        </tr>
+                    </thead>
+                    <tbody id="datos_tablas">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="divbotones">
+
+
+                <button id="btSalir" type="submit" class="btn btn-danger">Salir</button>
+            </div>
         </div>
-        
 
 
         <script>
+            $('#btSalir').click(function(e) {
+                $(location).attr('href', '../index.php');
+            });
+
+            
             (function Ordenar($) {
                 $.fn.extend({
                     makeSortable: function() {
@@ -94,44 +115,44 @@
 
             window.onload = function() {
                 Buscar();
-                
+
             }
 
 
             function Buscar() {
-                $.getJSON("../Controller/Leer.php?accion=leer",function(respuesta){
+                $.getJSON("../Controller/Reporte.php?accion=leer", function(respuesta) {
                     console.log(respuesta);
-                        var array = [];
-                        //bucle para recorrer los datos index-valor
-                        $.each(respuesta, function(llave, valor) {
+                    var array = [];
+                    //bucle para recorrer los datos index-valor
+                    $.each(respuesta, function(llave, valor) {
 
-                            if (llave >= 0) {
-                                
-                                tabla = "<tr>";
-                                tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
-                                tabla += "<td>" + valor.Ced + "</td>";
-                                tabla += "<td>" + valor.Prov1 + "</td>";
-                                tabla += "<td>" + valor.FechNa + "</td>";
-                                tabla += "<td>" + valor.Email + "</td>";
-                                tabla += "<td>" + valor.Observ1 + "</td>";
-                                tabla += "<td>" + valor.FechIng + "</td>";
-                                tabla += "<td>" + valor.Cargo + "</td>";
-                                tabla += "<td>" + valor.Depart + "</td>";
-                                tabla += "<td>" + valor.Prov2 + "</td>";
-                                tabla += "<td>" + valor.Sueldo + "</td>";
-                                tabla += "<td>" + valor.Jornada + "</td>";
-                                tabla += "<td>" + valor.Observ2 + "</td>";
-                                tabla += "</tr>";
-                                //console.log(valor.Nombre);
-                                array.push(tabla);
-                            }
-                        });
-                        //inserta los datos en la tabla
-                        $("#datos_tablas").append(array.join(""));
-                        
+                        if (llave >= 0) {
+
+                            tabla = "<tr>";
+                            tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
+                            tabla += "<td>" + valor.Ced + "</td>";
+                            tabla += "<td>" + valor.Prov1 + "</td>";
+                            tabla += "<td>" + valor.FechNa + "</td>";
+                            tabla += "<td>" + valor.Email + "</td>";
+                            tabla += "<td>" + valor.Observ1 + "</td>";
+                            tabla += "<td>" + valor.FechIng + "</td>";
+                            tabla += "<td>" + valor.Cargo + "</td>";
+                            tabla += "<td>" + valor.Depart + "</td>";
+                            tabla += "<td>" + valor.Prov2 + "</td>";
+                            tabla += "<td>" + valor.Sueldo + "</td>";
+                            tabla += "<td>" + valor.Jornada + "</td>";
+                            tabla += "<td>" + valor.Observ2 + "</td>";
+                            tabla += "</tr>";
+                            //console.log(valor.Nombre);
+                            array.push(tabla);
+                        }
+                    });
+                    //inserta los datos en la tabla
+                    $("#datos_tablas").append(array.join(""));
+
 
                 });
-               
+
                 $("#datos_tablas").empty();
             }
         </script>

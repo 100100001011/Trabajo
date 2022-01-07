@@ -1,6 +1,6 @@
 <?php
 
-function leer()
+function Reporte()
 {
     include '../Model/conexion.php';
     $consulta = "SELECT * FROM `empleados`";
@@ -63,7 +63,7 @@ function buscar($buscarNombre, $buscarCedula)
 {
     include '../Model/conexion.php';
     $arr = array();
-    $consulta = "SELECT * FROM `empleados`";
+    $consulta = "SELECT * FROM `empleados` LIMIT 20";
     if ($buscarNombre != '') {
         $consulta = "SELECT * FROM `empleados` WHERE `Nombre` LIKE '%$buscarNombre%' OR `Apellido` LIKE '%$buscarNombre%'";
     }
