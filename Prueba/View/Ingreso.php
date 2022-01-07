@@ -34,6 +34,7 @@
 
 <body>
 
+
     <div class="container">
 
 
@@ -82,10 +83,7 @@
                                 <div class="form-group col-md-6">
                                     <label>Provincia</label>
                                     <select class="form-control" id="inp_provincia1">
-                                        <option selected>Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+
                                     </select>
                                 </div>
 
@@ -148,10 +146,7 @@
                                 <div class="form-group col-md-6">
                                     <label>Provincia</label>
                                     <select class="form-control" id="inp_provincia2">
-                                        <option selected>Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+
                                     </select>
                                 </div>
 
@@ -185,7 +180,7 @@
 
                             </div>
 
-                            <div class="form-group col-md-12" >
+                            <div class="form-group col-md-12">
                                 <button id="btIngresar" type="submit" class="btn btn-primary">Ingresar</button>
 
                             </div>
@@ -196,23 +191,26 @@
         </div>
 
     </div>
-    </div>
 
 
 
-    </div>
 
 
-    </div>
 
     <script>
         //=======>JQUERY
         /*
         $('#btIngresar').click(function(e) {
-            alert("aplasto");
-            //insert();
+            location.reload();
         });
         */
+        
+        window.onload = function() {
+            
+            provincia();
+            
+        };
+
         //Cargar Imagen
         $(document).on("click", ".browse", function() {
             var file = $(this).parents().find(".file");
@@ -263,6 +261,30 @@
                 }
             });
 
+        }
+
+        function provincia() {
+            $.getJSON("../Controller/Provincias.php?accion=provincia", function(registro) {
+                var array = [];
+                $.each(registro, function(llave, valor) {
+
+                    if (llave >= 0) {
+
+
+                        console.log(valor.inp_provincia1);
+
+                        var select = "<option value=' " + valor.nombre_provincia + "'>" + valor.nombre_provincia + "</option>";
+                        //var select = "<option value='cris'>cris</option>";
+                        array.push(select);
+                    }
+                    //alert(array);
+                });
+                //inserta los datos en la tabla
+                $("#inp_provincia1").append(array.join(""));
+                $("#inp_provincia2").append(array.join(""));
+
+
+            })
         }
     </script>
 

@@ -119,3 +119,23 @@ function actualizar($id, $nombres, $apellidos, $cedula, $provincia, $fec_na, $em
     $sql->close();
     //echo 'Insertado';
 }
+
+
+
+function provincias(){
+    include '../Model/conexion.php';
+    $consulta = "SELECT * FROM `provincia`";
+    if ($resultado = $cnx->query($consulta)) {
+        while ($obj = $resultado->fetch_object()) {
+
+            $arr[] = array(
+                'nombre_provincia' => $obj->nombre_provincia,
+            );
+        }
+        $resultado->close();
+        
+    }
+    //var_dump($arr);
+    return json_encode($arr);
+
+}

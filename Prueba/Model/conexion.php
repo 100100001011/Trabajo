@@ -3,8 +3,8 @@
 $usuario= "root";
 $clave= "";
 $server= "localhost";
-//$bdd = "prueba";
-$bdd = "pedidos";
+$bdd = "prueba";
+//$bdd = "pedidos";
 
 $cnx = new mysqli($server,$usuario,$clave,$bdd);
 

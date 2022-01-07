@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <!-- BOOTSTARP -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -58,16 +58,18 @@
                 </table>
             </div>
             <div class="form-group col-md-6">
-            <button id="btInsertar" type="button" class="btn btn-primary">Crear</button>
-            <button id="btReporte" type="button" class="btn btn-primary">Reporte</button>
+                <button id="btInsertar" type="button" class="btn btn-primary">Crear</button>
+                <button id="btReporte" type="button" class="btn btn-primary">Reporte</button>
             </div>
-           
+
     </section>
     <!-- <====================== -->
 
     <!-- FORMULARIO EMPLEADO =====> -->
 
     <section id='2'>
+
+        <?php include './Model/consultas.php' ?>
 
         <div class="container">
 
@@ -79,58 +81,63 @@
                 </div>
 
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active">
-                        <a href="#D_Personales" data-toggle="tab">Datos Personales</a>
+                    <li class="nav-item"">
+                    <a class=" nav-link active" href="#D_Personales" data-toggle="tab">Datos Personales</a>
                     </li>
                     <li>
-                        <a href="#D_Laborables" data-toggle="tab">Datos Laborables</a>
+                        <a class="nav-link " href="#D_Laborables" data-toggle="tab">Datos Laborables</a>
                     </li>
                 </ul>
 
-                <div class="card-body">
-                    <div class="tab-content">
-                        <!--Etiqueta Datos Pesonales-->
-                        <div role="tabpanel" class="tab-pane active" id="D_Personales">
-                            <!--Formulario-->
-                            <form action="" method="post">
+                <form action="javascript:Actualizar();" method="post" class="was-validated">
+                    <div class="card-body">
+                        <div class="tab-content">
+
+                            <!--Etiqueta-->
+                            <div role="tabpanel" class="tab-pane active" id="D_Personales">
+                                <!--Formulario-->
+
                                 <div class="form-row">
 
                                     <div class="form-group col-md-6">
                                         <label>Nombres</label>
-                                        <input type="text" class="form-control" id="inp_nombres" placeholder="Nombres">
+                                        <input type="text" class="form-control" id="inp_nombres" placeholder="Nombres" maxlength="50" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Apellidos</label>
-                                        <input type="text" class="form-control" id="inp_apellidos" placeholder="Apellidos">
+                                        <input type="text" class="form-control" id="inp_apellidos" placeholder="Apellidos" maxlength="50" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Cedula</label>
-                                        <input type="text" class="form-control" id="inp_cedula" placeholder="Cedula">
+                                        <input class="form-control" id="inp_cedula" placeholder="Cedula" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Provincia</label>
                                         <select class="form-control" id="inp_provincia1">
-                                            <option selected>Choose...</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Fecha de nacimientos</label>
-                                        <input type="date" class="form-control" id="inp_fecha" placeholder="aaaa-mm-dd">
+                                        <input type="date" class="form-control" id="inp_fecha" placeholder="aaaa-mm-dd" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" id="inp_email" placeholder="Email">
+                                        <input type="email" class="form-control" id="inp_email" placeholder="Email" required maxlength="50">
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Observaciones</label>
-                                        <input type="text" class="form-control" id="inp_observacion1" placeholder="Comentario u obsercvacion">
+
+                                        <textarea class="form-control" id="inp_observacion1" rows="3" placeholder="Observaciones" maxlength="100"></textarea>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Fotografia</label>
@@ -145,41 +152,44 @@
 
                                 </div>
 
-                            </form>
-                        </div>
 
-                        <!--Etiqueta Datos Laborables-->
-                        <div role="tabpanel" class="tab-pane" id="D_Laborables">
-                            <form action="" method="post">
+
+
+                            </div>
+
+                            <!--Etiqueta-->
+                            <div role="tabpanel" class="tab-pane" id="D_Laborables">
+
                                 <div class="form-row">
 
                                     <div class="form-group col-md-6">
                                         <label>Fecha de ingreso</label>
-                                        <input type="date" class="form-control" id="inp_fechaingreso" placeholder="aaaa-mm-dd">
+                                        <input type="date" class="form-control" id="inp_fechaingreso" placeholder="aaaa-mm-dd" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Cargo</label>
-                                        <input type="text" class="form-control" id="inp_cargo">
+                                        <input type="text" class="form-control" id="inp_cargo" maxlength="20" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Departamento:</label>
-                                        <input type="text" class="form-control" id="inp_departamento">
+                                        <input type="text" class="form-control" id="inp_departamento" maxlength="20" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Provincia</label>
                                         <select class="form-control" id="inp_provincia2">
-                                            <option selected>Choose...</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Sueldo:</label>
-                                        <input type="text" class="form-control" id="inp_sueldo">
+                                        <input type="text" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                        <div class="invalid-feedback">Campo requerido.</div>
                                     </div>
 
 
@@ -200,111 +210,114 @@
 
                                     <div class="form-group col-md-12">
                                         <label for="inputAddress2">Observaciones</label>
-                                        <input type="text" class="form-control" id="inp_obser" placeholder="Apartment, studio, or floor">
+
+                                        <textarea class="form-control" id="inp_obser" rows="3" placeholder="Observaciones" maxlength="100"></textarea>
                                     </div>
 
                                 </div>
-                            </form>
-                        </div>
 
-                    </div>
-                </div>
+                                <div class="form-group col-md-12">
+                                    <button id="btActualizar" type="submit" class="btn btn-primary">Actualizar</button>
 
+                                </div>
+
+                </form>
             </div>
-            <button id="btActualizar" type="button" class="btn btn-primary">Actualizar</button>
+
         </div>
 
-        </section>
+    </section>
 
-        <!-- <========================= -->
+    <!-- <========================= -->
 
 
-        <script>
-            var idUp;
-            //=======>JQUERY
-            //AL CARGAR LA PAGINA
-            window.onload = function() {
-                Buscar();
-                $('#2').hide();
-            }
+    <script>
+        var idUp;
+        //=======>JQUERY
+        //AL CARGAR LA PAGINA
+        window.onload = function() {
+            Buscar();
+            provincia();
+            $('#2').hide();
+        }
 
-            //Cambiar de archivo
-            $('#btInsertar').click(function(e) {
-                $(location).attr('href','./View/Ingreso.php');
+        //Cambiar de archivo
+        $('#btInsertar').click(function(e) {
+            $(location).attr('href', './View/Ingreso.php');
 
-            });
+        });
 
-            $('#btReporte').click(function(e) {
-                $(location).attr('href','./View/Reporte.php');
+        $('#btReporte').click(function(e) {
+            $(location).attr('href', './View/Reporte.php');
 
-            });
+        });
 
-            //Clic btn ingresar
-            $('#btActualizar').click(function(e) {
-                Actualizar();
-                //Ocultar
-                $('#2').hide();
-                //Mostrar
-                $('#1').show();
-                //Recargar Sitio
-                location.reload()
+        //Clic btn ingresar
+        $('#btActualizar').click(function(e) {
+            Actualizar();
+            //Ocultar
+            $('#2').hide();
+            //Mostrar
+            $('#1').show();
+            //Recargar Sitio
+            location.reload()
 
-            });
-            //Cargar Imagen ficha
-            $(document).on("click", ".browse", function() {
-                var file = $(this).parents().find(".file");
-                file.trigger("click");
-            });
-            $('input[type="file"]').change(function(e) {
-                var fileName = e.target.files[0].name;
-                $("#file").val(fileName);
+        });
+        //Cargar Imagen ficha
+        $(document).on("click", ".browse", function() {
+            var file = $(this).parents().find(".file");
+            file.trigger("click");
+        });
+        $('input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+            $("#file").val(fileName);
 
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById("prevista").src = e.target.result;
-                };
-                reader.readAsDataURL(this.files[0]);
-            });
-            //Clic btn buscar
-            $('#btBuscar').click(function(e) {
-                Buscar();
-            });
-            //Vaciar la tabla
-            $("#datos_tablas").empty();
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("prevista").src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+        //Clic btn buscar
+        $('#btBuscar').click(function(e) {
+            Buscar();
+        });
+        //Vaciar la tabla
+        $("#datos_tablas").empty();
 
-            //<=========
+        //<=========
 
-            function Buscar() {
-                /*
-                $(document).ready(function(){
-                    $('#inp_buscar').keyup(function(){
-                        var buscar = $(this).val();
-                        console.log(buscar); 
-                    })
+        function Buscar() {
+            /*
+            $(document).ready(function(){
+                $('#inp_buscar').keyup(function(){
+                    var buscar = $(this).val();
+                    console.log(buscar); 
                 })
-                */
+            })
+            */
 
-                var datos = new FormData();
-                datos.append('b_nombre', $('#inp_buscarNombre').val());
-                datos.append('b_cedula', $('#inp_buscarCedula').val());
+            var datos = new FormData();
+            datos.append('b_nombre', $('#inp_buscarNombre').val());
+            datos.append('b_cedula', $('#inp_buscarCedula').val());
 
 
-                $.ajax({
-                    type: "post",
-                    url: "./Controller/Select.php?accion=buscar",
-                    data: datos,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json",
-                    success: function(respuesta) {
-                        console.log(respuesta);
-                        var array = [];
-                        //bucle para recorrer los datos index-valor
-                        $.each(respuesta, function(llave, valor) {
+            $.ajax({
+                type: "post",
+                url: "./Controller/Select.php?accion=buscar",
+                data: datos,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    var array = [];
+                    //bucle para recorrer los datos index-valor
+                    $.each(respuesta, function(llave, valor) {
 
-                            if (llave >= 0) {
-                                //var tabla = "<tr onclick='Actualizar(id)'>";
-                                var tabla = "<tr <a href='#' onclick = \" Enviar_Datos( \n\
+                        if (llave >= 0) {
+                            //var tabla = "<tr onclick='Actualizar(id)'>";
+                            var tabla = "<tr <a href='#' onclick = \" Enviar_Datos( \n\
                             '" + (valor.id) + "',\n\
                             '" + (valor.Nom) + "',\n\
                             '" + (valor.Ape) + "',\n\
@@ -322,88 +335,112 @@
                             '" + (valor.Jornada) + "',\n\
                             '" + (valor.Observ2) + "') \" >";
 
-                                tabla += "</a>";
-                                tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
-                                tabla += "<td>" + valor.Ced + "</td>";
-                                tabla += "<td>" + valor.Cargo + "</td>";
-                                tabla += "</tr>";
-                                //console.log(valor.Nombre);
-                                array.push(tabla);
-                            }
-                        });
-                        //inserta los datos en la tabla
-                        $("#datos_tablas").append(array.join(""));
-                        console.log(datos);
+                            tabla += "</a>";
+                            tabla += "<td>" + valor.Nom + " " + valor.Ape + "</td>";
+                            tabla += "<td>" + valor.Ced + "</td>";
+                            tabla += "<td>" + valor.Cargo + "</td>";
+                            tabla += "</tr>";
+                            //console.log(valor.Nombre);
+                            array.push(tabla);
+                        }
+                    });
+                    //inserta los datos en la tabla
+                    $("#datos_tablas").append(array.join(""));
+                    console.log(datos);
 
+                }
+            });
+            $("#datos_tablas").empty();
+        }
+
+
+
+
+        function Actualizar() {
+            alert(idUp);
+            var datos = new FormData();
+            datos.append('id', idUp);
+            datos.append('nombres', $('#inp_nombres').val());
+            datos.append('apellidos', $('#inp_apellidos').val());
+            datos.append('cedula', $('#inp_cedula').val());
+            datos.append('provincia', $('#inp_provincia1').val());
+            datos.append('fec_na', $('#inp_fecha').val());
+            datos.append('email', $('#inp_email').val());
+            datos.append('observaciones1', $('#inp_observacion1').val());
+            datos.append('foto', $('#file_image').val());
+            datos.append('fec_ingre', $('#inp_fechaingreso').val());
+            datos.append('cargo', $('#inp_cargo').val());
+            datos.append('departamento', $('#inp_departamento').val());
+            datos.append('provincia2', $('#inp_provincia2').val());
+            datos.append('sueldo', $('#inp_sueldo').val());
+            datos.append('jornada', $('#rad_jornada1').val());
+            datos.append('observaciones2', $('#inp_obser').val());
+
+
+            $.ajax({
+                type: "post",
+                url: "./Controller/Actualizar.php?accion=insertar",
+                data: datos,
+                processData: false,
+                contentType: false,
+                success: function(respuesta) {
+                    alert(respuesta);
+
+                }
+            });
+
+        }
+
+        function Enviar_Datos(id, nom, ape, ced, prov1, fechna, email, observ1, foto, feching, cargo, depart, prov2, sueldo, jornada, observ2) {
+            //$(location).prop('href', './View/Ingreso.php')  
+            alert(feching);
+            $('#1').hide();
+            $('#2').show();
+            $("#inp_nombres").val(nom);
+            $("#inp_apellidos").val(ape);
+            $("#inp_cedula").val(ced);
+            $("#inp_provincia1").val(prov1);
+            $("#inp_fecha").val(fechna);
+            $("#inp_email").val(email);
+            $("#inp_observacion1").val(observ1);
+            //$("#file_image").val(foto);
+            $("#inp_fechaingreso").val(feching);
+            $("#inp_cargo").val(cargo);
+            $("#inp_departamento").val(depart);
+            $("#inp_provincia2").val(prov2);
+            $("#inp_sueldo").val(sueldo);
+            $("#rad_jornada1").val(jornada);
+            $("#inp_obser").val(observ2);
+            idUp = id
+        }
+
+        function provincia() {
+            $.getJSON("./Controller/Provincias.php?accion=provincia", function(registro) {
+                var array = [];
+                $.each(registro, function(llave, valor) {
+
+                    if (llave >= 0) {
+
+                        console.log(valor.inp_provincia1);
+
+                        var select = "<option value=' " + valor.nombre_provincia + "'>" + valor.nombre_provincia + "</option>";
+                        
+                        array.push(select);
                     }
+                    //alert(array);
                 });
-                $("#datos_tablas").empty();
-            }
+                
+                $("#inp_provincia1").append(array.join(""));
+                $("#inp_provincia2").append(array.join(""));
+                
+
+            })
+        }
+        
+    </script>
 
 
 
-
-            function Actualizar() {
-                alert(idUp);
-                var datos = new FormData();
-                datos.append('id', idUp);
-                datos.append('nombres', $('#inp_nombres').val());
-                datos.append('apellidos', $('#inp_apellidos').val());
-                datos.append('cedula', $('#inp_cedula').val());
-                datos.append('provincia', $('#inp_provincia1').val());
-                datos.append('fec_na', $('#inp_fecha').val());
-                datos.append('email', $('#inp_email').val());
-                datos.append('observaciones1', $('#inp_observacion1').val());
-                datos.append('foto', $('#file_image').val());
-                datos.append('fec_ingre', $('#inp_fechaingreso').val());
-                datos.append('cargo', $('#inp_cargo').val());
-                datos.append('departamento', $('#inp_departamento').val());
-                datos.append('provincia2', $('#inp_provincia2').val());
-                datos.append('sueldo', $('#inp_sueldo').val());
-                datos.append('jornada', $('#rad_jornada1').val());
-                datos.append('observaciones2', $('#inp_obser').val());
-
-
-                $.ajax({
-                    type: "post",
-                    url: "./Controller/Actualizar.php?accion=insertar",
-                    data: datos,
-                    processData: false,
-                    contentType: false,
-                    success: function(respuesta) {
-                        alert(respuesta);
-
-                    }
-                });
-
-            }
-
-            function Enviar_Datos(id, nom, ape, ced, prov1, fechna, email, observ1, foto, feching, cargo, depart, prov2, sueldo, jornada, observ2) {
-                //$(location).prop('href', './View/Ingreso.php')  
-                alert(feching);
-                $('#1').hide();
-                $('#2').show();
-                $("#inp_nombres").val(nom);
-                $("#inp_apellidos").val(ape);
-                $("#inp_cedula").val(ced);
-                $("#inp_provincia1").val(prov1);
-                $("#inp_fecha").val(fechna);
-                $("#inp_email").val(email);
-                $("#inp_observacion1").val(observ1);
-                //$("#file_image").val(foto);
-                $("#inp_fechaingreso").val(feching);
-                $("#inp_cargo").val(cargo);
-                $("#inp_departamento").val(depart);
-                $("#inp_provincia2").val(prov2);
-                $("#inp_sueldo").val(sueldo);
-                $("#rad_jornada1").val(jornada);
-                $("#inp_obser").val(observ2);
-                idUp = id
-            }
-        </script>
-
-
-    
 
 </body>
 
