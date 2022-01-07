@@ -18,6 +18,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <style>
+        .file {
+            visibility: hidden;
+            position: absolute;
+        }
+
+        textarea {
+            resize: none;
+        }
+    </style>
 
 </head>
 
@@ -69,15 +79,13 @@
 
     <section id='2'>
 
-        <?php include './Model/consultas.php' ?>
-
         <div class="container">
 
 
             <div role="tabpanel">
 
                 <div class="card-header">
-                    Ingreso
+                    Actualizar
                 </div>
 
                 <ul class="nav nav-tabs" role="tablist">
@@ -89,7 +97,7 @@
                     </li>
                 </ul>
 
-                <form action="javascript:Actualizar();" method="post" class="was-validated">
+                <form id="F_Actualizar" action="javascript:Actualizar();" method="post" class="was-validated">
                     <div class="card-body">
                         <div class="tab-content">
 
@@ -198,11 +206,11 @@
                                         <br>
                                         <div class="form-group row-md-4">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rad_jornada1" value="S">
+                                                <input class="form-check-input" type="radio" name="jornada" id="rad_jornada1" value="S">
                                                 <label class="form-check-label">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rad_jornada2" value="N">
+                                                <input class="form-check-input" type="radio" name="jornada" id="rad_jornada2" value="N">
                                                 <label class="form-check-label">No</label>
                                             </div>
                                         </div>
@@ -236,7 +244,7 @@
         //=======>JQUERY
         //AL CARGAR LA PAGINA
         window.onload = function() {
-            Buscar();
+            Buscar_Mostrar();
             provincia();
             $('#2').hide();
         }
@@ -252,17 +260,7 @@
 
         });
 
-        //Clic btn ingresar
-        $('#btActualizar').click(function(e) {
-            Actualizar();
-            //Ocultar
-            $('#2').hide();
-            //Mostrar
-            $('#1').show();
-            //Recargar Sitio
-            location.reload()
-
-        });
+        
         //Cargar Imagen ficha
         $(document).on("click", ".browse", function() {
             var file = $(this).parents().find(".file");
@@ -280,14 +278,14 @@
         });
         //Clic btn buscar
         $('#btBuscar').click(function(e) {
-            Buscar();
+            Buscar_Mostrar();
         });
         //Vaciar la tabla
         $("#datos_tablas").empty();
 
         //<=========
 
-        function Buscar() {
+        function Buscar_Mostrar() {
             /*
             $(document).ready(function(){
                 $('#inp_buscar').keyup(function(){
@@ -357,7 +355,7 @@
 
 
         function Actualizar() {
-            alert(idUp);
+            //alert(idUp);
             var datos = new FormData();
             datos.append('id', idUp);
             datos.append('nombres', $('#inp_nombres').val());
@@ -384,7 +382,16 @@
                 processData: false,
                 contentType: false,
                 success: function(respuesta) {
-                    alert(respuesta);
+                    if (respuesta === 'OK') {
+                        alert("DATOS ACTUALIZADOS");
+                        //Ocultar
+                        $('#2').hide();
+                        //Mostrar
+                        $('#1').show();
+                        location.reload();
+                    } else {
+                        alert("DATOS NO ACTUALIZADOS");
+                    }
 
                 }
             });
@@ -409,7 +416,7 @@
             $("#inp_departamento").val(depart);
             $("#inp_provincia2").val(prov2);
             $("#inp_sueldo").val(sueldo);
-            $("#rad_jornada1").val(jornada);
+            $("input:radio[name=jornada]").val(jornada);
             $("#inp_obser").val(observ2);
             idUp = id
         }
@@ -424,19 +431,18 @@
                         console.log(valor.inp_provincia1);
 
                         var select = "<option value=' " + valor.nombre_provincia + "'>" + valor.nombre_provincia + "</option>";
-                        
+
                         array.push(select);
                     }
                     //alert(array);
                 });
-                
+
                 $("#inp_provincia1").append(array.join(""));
                 $("#inp_provincia2").append(array.join(""));
-                
+
 
             })
         }
-        
     </script>
 
 

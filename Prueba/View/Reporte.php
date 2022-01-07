@@ -32,22 +32,22 @@
         </div>
      
         <div class="form-group col-md-12 ">
-            <table class="table table-hover" id="Reporte">
+            <table class="table-bordered" id="Reporte">
                 <thead>
                     <tr>
-                        <th class="bg-info text-white">Nombre</th>
-                        <th class="bg-info text-white">Cedula</th>
-                        <th class="bg-info text-white">Provincia</th>
-                        <th class="bg-info text-white">Fecha Nacimiento</th>
-                        <th class="bg-info text-white">Email</th>
-                        <th class="bg-info text-white">Observaciones</th>
-                        <th class="bg-info text-white">Fecha Ingreso</th>
-                        <th class="bg-info text-white">Cargo</th>
-                        <th class="bg-info text-white">Departamento</th>
-                        <th class="bg-info text-white">Provincia</th>
-                        <th class="bg-info text-white">Suledo</th>
-                        <th class="bg-info text-white">Jornada</th>
-                        <th class="bg-info text-white">Observaciones</th>
+                        <th class="bg-success text-black">Nombre</th>
+                        <th class="bg-success text-black">Cedula</th>
+                        <th class="bg-success text-black">Provincia</th>
+                        <th class="bg-success text-black">Fecha Nacimiento</th>
+                        <th class="bg-success text-black">Email</th>
+                        <th class="bg-success text-black">Observaciones</th>
+                        <th class="bg-success text-black">Fecha Ingreso</th>
+                        <th class="bg-success text-black">Cargo</th>
+                        <th class="bg-success text-black">Departamento</th>
+                        <th class="bg-success text-black">Provincia</th>
+                        <th class="bg-success text-black">Suledo</th>
+                        <th class="bg-success text-black">Jornada</th>
+                        <th class="bg-success text-black">Observaciones</th>
                         
                     </tr>
                 </thead>
@@ -60,33 +60,25 @@
 
 
         <script>
-            (function($) {
+            (function Ordenar($) {
                 $.fn.extend({
                     makeSortable: function() {
                         var Mitabla = this;
-
                         var getCellValue = function(fila, index) {
                             return $(fila).children('td').eq(index).text();
                         };
-
                         Mitabla.find('th').click(function() {
                             var tabla = $(this).parents('table').eq(0);
-
-
                             var fila = tabla.find('tr:gt(0)').toArray().sort(function(a, b) {
                                 var index = $(this).index();
                                 var valA = getCellValue(a, index),
                                     valB = getCellValue(b, index);
-
                                 return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
                             });
-
                             this.asc = !this.asc;
-
                             if (!this.asc) {
                                 fila = fila.reverse();
                             }
-
                             for (var i = 0; i < fila.length; i++) {
                                 tabla.append(fila[i]);
                             }

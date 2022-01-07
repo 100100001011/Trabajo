@@ -46,8 +46,14 @@ function insertar($nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $o
 
     $sql->bind_param("sssssssssssssss", $nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2);
     $sql->execute();
+
+    if ($cnx->prepare($consulta)) {
+        echo 'OK';
+    } else {
+        echo "BAD";
+    }
+
     $sql->close();
-    echo 'Insertado';
 }
 
 
@@ -111,18 +117,21 @@ function actualizar($id, $nombres, $apellidos, $cedula, $provincia, $fec_na, $em
     $sql->bind_param("ssssssssssssssss", $nombres, $apellidos, $cedula, $provincia, $fec_na, $email, $observaciones1, $foto, $fec_ingre, $cargo, $departamento, $provincia2, $sueldo, $jornada, $observaciones2, $id);
 
     $sql->execute();
-    if ($sql) {
-        echo "actualizo";
+
+    if ($cnx->prepare($consulta)) {
+        echo 'OK';
     } else {
-        echo "no actualizo";
+        echo "BAD";
     }
+
     $sql->close();
     //echo 'Insertado';
 }
 
 
 
-function provincias(){
+function provincias()
+{
     include '../Model/conexion.php';
     $consulta = "SELECT * FROM `provincia`";
     if ($resultado = $cnx->query($consulta)) {
@@ -133,9 +142,7 @@ function provincias(){
             );
         }
         $resultado->close();
-        
     }
     //var_dump($arr);
     return json_encode($arr);
-
 }

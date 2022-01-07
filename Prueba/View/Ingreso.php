@@ -53,7 +53,7 @@
                 </li>
             </ul>
 
-            <form action="javascript:insert();" method="post" class="was-validated">
+            <form id="F_Ingreso" action="javascript:insert();" method="post" class="was-validated">
                 <div class="card-body">
                     <div class="tab-content">
 
@@ -108,8 +108,8 @@
                                     <input type="file" name="img[]" class="file" accept="image/*" id="file_image">
 
                                     <div>
-                                        <img src="" width="100" height="100" id="prevista" class="img-circle">
-                                        <button type="button" class="browse btn btn-primary">Cargar</button>
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="100" height="100" id="prevista" class="img-circle">
+                                        <button type="button" class="browse btn btn-primary">Cargar imagen</button>
                                     </div>
 
                                 </div>
@@ -138,7 +138,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label>Departamento:</label>
+                                    <label>Departamento</label>
                                     <input type="text" class="form-control" id="inp_departamento" maxlength="20" required>
                                     <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
@@ -151,8 +151,8 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label>Sueldo:</label>
-                                    <input type="text" class="form-control" id="inp_sueldo" maxlength="10" required>
+                                    <label>Sueldo</label>
+                                    <input type="number" class="form-control" id="inp_sueldo" maxlength="10" required>
                                     <div class="invalid-feedback">Campo requerido.</div>
                                 </div>
 
@@ -162,11 +162,11 @@
                                     <br>
                                     <div class="form-group row-md-4">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rad_jornada1" value="S">
+                                            <input class="form-check-input" type="radio" name="jornada" id="rad_jornada1" value="S">
                                             <label class="form-check-label">Si</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rad_jornada2" value="N">
+                                            <input class="form-check-input" type="radio" name="jornada" id="rad_jornada2" value="N">
                                             <label class="form-check-label">No</label>
                                         </div>
                                     </div>
@@ -185,8 +185,6 @@
 
                             </div>
 
-
-
             </form>
         </div>
 
@@ -204,11 +202,12 @@
             location.reload();
         });
         */
-        
+      
+
         window.onload = function() {
-            
+
             provincia();
-            
+
         };
 
         //Cargar Imagen
@@ -245,7 +244,7 @@
             datos.append('departamento', $('#inp_departamento').val());
             datos.append('provincia2', $('#inp_provincia2').val());
             datos.append('sueldo', $('#inp_sueldo').val());
-            datos.append('jornada', $('#rad_jornada1').val());
+            datos.append('jornada', $('input:radio[name=jornada]:checked').val());
             datos.append('observaciones2', $('#inp_obser').val());
 
 
@@ -256,7 +255,16 @@
                 processData: false,
                 contentType: false,
                 success: function(respuesta) {
-                    alert(respuesta);
+                    //alert(respuesta);
+                    if (respuesta === 'OK') {
+                        alert("DATOS INGRESADOS");
+                        $('#F_Ingreso')[0].reset();
+                        location.reload();
+                    }else{
+                        alert("DATOS NO INGRESADOS");
+                    }
+
+
 
                 }
             });
@@ -285,6 +293,24 @@
 
 
             })
+        }
+
+        function limpiarCampos() {
+            datos.append('', $('#inp_nombres').val());
+            datos.append('', $('#inp_apellidos').val());
+            datos.append('', $('#inp_cedula').val());
+            datos.append('', $('#inp_provincia1').val());
+            datos.append('', $('#inp_fecha').val());
+            datos.append('', $('#inp_email').val());
+            datos.append('', $('#inp_observacion1').val());
+            datos.append('', $('#file_image').val());
+            datos.append('', $('#inp_fechaingreso').val());
+            datos.append('', $('#inp_cargo').val());
+            datos.append('', $('#inp_departamento').val());
+            datos.append('', $('#inp_provincia2').val());
+            datos.append('', $('#inp_sueldo').val());
+            datos.append('', $('#rad_jornada1').val());
+            datos.append('', $('#inp_obser').val());
         }
     </script>
 
