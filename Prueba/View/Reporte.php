@@ -36,29 +36,29 @@
     <div class="card">
         <div class="card-header">
             <div class="form-group col-md-12 ">
-                <h3 align="center" >Reporte Empleado</h3>
+                <h3 align="center">Reporte Empleado</h3>
 
             </div>
         </div>
         <div class="card-body">
             <div class="form-group col-md-12 ">
                 <!--class="table-bordered"-->
-                <table id="Reporte" class="table-bordered">
+                <table id="Reporte" class="table table-striped">
                     <thead>
                         <tr>
-                            <th class="text-center">Nombre</th>
-                            <th class="text-center">Cedula</th>
-                            <th class="text-center">Provincia</th>
-                            <th class="text-center">Fecha Nacimiento</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Observaciones</th>
-                            <th class="text-center">Fecha Ingreso</th>
-                            <th class="text-center">Cargo</th>
-                            <th class="text-center">Departamento</th>
-                            <th class="text-center">Provincia</th>
-                            <th class="text-center">Suledo</th>
-                            <th class="text-center">Jornada</th>
-                            <th class="text-center">Observaciones</th>
+                            <th class="text-center" onclick="ordenarTabla(0, 'str')">Nombre</th>
+                            <th class="text-center" onclick="ordenarTabla(1, 'str')">Cedula</th>
+                            <th class="text-center" onclick="ordenarTabla(2, 'str')">Provincia</th>
+                            <th class="text-center" onclick="ordenarTabla(3, 'int')">Fecha Nacimiento</th>
+                            <th class="text-center" onclick="ordenarTabla(4, 'str')">Email</th>
+                            <th class="text-center" onclick="ordenarTabla(5, 'str')">Observaciones</th>
+                            <th class="text-center" onclick="ordenarTabla(6, 'int')">Fecha Ingreso</th>
+                            <th class="text-center" onclick="ordenarTabla(7, 'str')">Cargo</th>
+                            <th class="text-center" onclick="ordenarTabla(8, 'str')">Departamento</th>
+                            <th class="text-center" onclick="ordenarTabla(9, 'str')">Provincia</th>
+                            <th class="text-center" onclick="ordenarTabla(10, 'int')">Suledo</th>
+                            <th class="text-center" onclick="ordenarTabla(11, 'str')">Jornada</th>
+                            <th class="text-center" onclick="ordenarTabla(12, 'str')">Observaciones</th>
 
                         </tr>
                     </thead>
@@ -78,39 +78,6 @@
         <script>
             $('#btSalir').click(function(e) {
                 $(location).attr('href', '../index.php');
-            });
-
-            
-            (function Ordenar($) {
-                $.fn.extend({
-                    makeSortable: function() {
-                        var Mitabla = this;
-                        var getCellValue = function(fila, index) {
-                            return $(fila).children('td').eq(index).text();
-                        };
-                        Mitabla.find('th').click(function() {
-                            var tabla = $(this).parents('table').eq(0);
-                            var fila = tabla.find('tr:gt(0)').toArray().sort(function(a, b) {
-                                var index = $(this).index();
-                                var valA = getCellValue(a, index),
-                                    valB = getCellValue(b, index);
-                                return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB);
-                            });
-                            this.asc = !this.asc;
-                            if (!this.asc) {
-                                fila = fila.reverse();
-                            }
-                            for (var i = 0; i < fila.length; i++) {
-                                tabla.append(fila[i]);
-                            }
-                        });
-                    }
-                });
-            })(jQuery);
-
-
-            $(function() {
-                $("#Reporte").makeSortable();
             });
 
             window.onload = function() {
@@ -154,6 +121,81 @@
                 });
 
                 $("#datos_tablas").empty();
+            }
+
+
+
+            function ordenarTabla(n, type) {
+
+                var tabla, filas, cambiar, i, x, y, debeCambiar, directorio, count_switch = 0;
+
+                tabla = document.getElementById("Reporte");
+
+                cambiar = true;
+
+                directorio = "asc";
+
+                while (cambiar) {
+
+                    cambiar = false;
+
+                    filas = tabla.rows;
+
+                    for (i = 1; i < (filas.length - 1); i++) {
+
+                        debeCambiar = false;
+
+                        x = filas[i].getElementsByTagName("TD")[n];
+
+                        y = filas[i + 1].getElementsByTagName("TD")[n];
+
+
+                        if (directorio == "asc") {
+
+                            if ((type == "str" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) > parseFloat(y.innerHTML))) {
+
+                                debeCambiar = true;
+
+                                break;
+
+                            }
+
+                        } else if (directorio == "desc") {
+
+                            if ((type == "str" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) || (type == "int" && parseFloat(x.innerHTML) < parseFloat(y.innerHTML))) {
+
+                                debeCambiar = true;
+
+                                break;
+
+                            }
+
+                        }
+
+                    }
+
+                    if (debeCambiar) {
+
+                        filas[i].parentNode.insertBefore(filas[i + 1], filas[i]);
+
+                        cambiar = true;
+
+                        count_switch++;
+
+                    } else {
+
+                        if (count_switch == 0 && directorio == "asc") {
+
+                            directorio = "desc";
+
+                            cambiar = true;
+
+                        }
+
+                    }
+
+                }
+
             }
         </script>
 </body>

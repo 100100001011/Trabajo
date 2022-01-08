@@ -190,7 +190,7 @@
                             </div>
 
                             <div class="form-group col-md-12">
-                                <button id="btIngresar" type="submit" class="btn btn-primary">Ingresar</button>
+                                <button id="btIngresar" type="submit" class="btn btn-success">Guardar</button>
 
                             </div>
 
